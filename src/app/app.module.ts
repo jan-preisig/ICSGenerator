@@ -10,19 +10,27 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {
   MatButtonModule,
   MatCardModule,
+  MatDatepickerModule,
   MatDividerModule,
   MatIconModule,
+  MatInputModule,
   MatMenuModule,
+  MatNativeDateModule,
   MatProgressSpinnerModule,
   MatTableModule,
   MatToolbarModule
 } from '@angular/material';
 import {CachingInterceptor} from './cache/caching-interceptor.service';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import {TerminComponent} from './components/termin/termin.component';
+import {HomeComponent} from './views/home/home.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TerminComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +47,12 @@ import {CachingInterceptor} from './cache/caching-interceptor.service';
     MatTableModule,
     MatDividerModule,
     MatProgressSpinnerModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxMaterialTimepickerModule,
+    FormsModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: CachingInterceptor, multi: true}],
   bootstrap: [AppComponent]

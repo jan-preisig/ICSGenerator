@@ -10,6 +10,7 @@ import {Router} from '@angular/router';
 export class AppComponent implements OnInit {
   title = 'ICS Generator';
   searchForm: FormGroup;
+  time: any;
 
   constructor(private formBuilder: FormBuilder,
               private router: Router) {
@@ -27,4 +28,5 @@ export class AppComponent implements OnInit {
     }
     this.router.navigate(['search'], {queryParams: {query: this.searchForm.get('search').value}});
   }
+
 }
