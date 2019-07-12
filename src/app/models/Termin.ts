@@ -1,6 +1,12 @@
 export interface Termin {
   title: string;
-  description: string;
+  description?: string;
+  location?: string;
+  startDate: Date;
+  startTime: string;
+  endDate: Date;
+  endTime: string;
+  dtStamp: Date;
   creationDate: Date;
-  creationTime: string;
+  uid: string;
 }

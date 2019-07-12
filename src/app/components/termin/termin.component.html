@@ -1,12 +1,69 @@
-<mat-form-field>
-  <input matInput [(ngModel)]="time" [format]="24" [ngxTimepicker]="picker">
-  <ngx-material-timepicker-toggle matSuffix [for]="picker"></ngx-material-timepicker-toggle>
-  <ngx-material-timepicker #picker></ngx-material-timepicker>
-</mat-form-field>
-<mat-form-field>
-  <input matInput [(ngModel)]="date" [matDatepicker]="creationDate" placeholder="Choose a date">
-  <mat-datepicker-toggle matSuffix [for]="creationDate"></mat-datepicker-toggle>
-  <mat-datepicker #creationDate></mat-datepicker>
-</mat-form-field>
-<button (click)="logTime()">Test</button>
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+  <mat-card fxFlex="500px" fxFlex.xs="100%">
+    <mat-card-title>Termin hinzufügen</mat-card-title>
+    <form [formGroup]="ownerForm" autocomplete="off" novalidate (ngSubmit)="createTermin(ownerForm.value)"
+          fxLayout="column wrap"
+          fxLayoutAlign="center center" fxLayoutGap="10px">
+      <mat-card-content>
+
+        <mat-form-field>
+          <input matInput type="text" placeholder="Termin Titel" formControlName="title" id="title">
+          <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('title', 'required')">Titel erforderlich</mat-error>
+          <mat-error *ngIf="hasError('title', 'maxlength')">You have more than 60 characters</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="text" placeholder="Termin Beschreibung" formControlName="description" id="description">
+          <mat-hint align="end">Not more then 100 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('description', 'maxlength')">You have more than 100 characters</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="text" placeholder="Ort" formControlName="location" id="location">
+          <mat-hint align="end">Not more then 20 characters long.</mat-hint>
+          <mat-error *ngIf="hasError('location', 'maxlength')">You have more than 20 characters</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput [matDatepicker]="startDate" placeholder="start Datum" formControlName="startDate"
+                 id="startDate"
+                 readonly (click)="startDate.open()">
+          <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+          <mat-datepicker #startDate></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput [format]="24" [ngxTimepicker]="startTime" placeholder="start Zeit"
+                 formControlName="startTime" id="startTime">
+          <ngx-material-timepicker-toggle matSuffix [for]="startTime"></ngx-material-timepicker-toggle>
+          <ngx-material-timepicker #startTime></ngx-material-timepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput [matDatepicker]="endDate" placeholder="end Datum" formControlName="endDate"
+                 id="endDate"
+                 readonly (click)="endDate.open()">
+          <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+          <mat-datepicker #endDate></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput [format]="24" [ngxTimepicker]="endTime" placeholder="end Zeit"
+                 formControlName="endTime" id="endTime">
+          <ngx-material-timepicker-toggle matSuffix [for]="endTime"></ngx-material-timepicker-toggle>
+          <ngx-material-timepicker #endTime></ngx-material-timepicker>
+        </mat-form-field>
+
+      </mat-card-content>
+      <mat-card-actions align="center">
+        <button mat-raised-button color="primary" [disabled]="!ownerForm.valid">Termin hinzufügen</button>
+        <!--        <button type="button" mat-raised-button color="warn" (click)="onCancel()">Cancel</button>-->
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</section>
+
+
+
 
