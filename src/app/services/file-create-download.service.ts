@@ -36,7 +36,7 @@ export class FileCreateDownloadService {
     });
     content += 'END:VCALENDAR';
     console.log('asdf');
-    this.createAndDownloadFile(fileName, content);
+    this.createAndDownloadFile(fileName + '.ics', content);
   }
 
   private generateICSHeader(): string {
