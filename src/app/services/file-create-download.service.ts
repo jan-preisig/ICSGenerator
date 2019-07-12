@@ -16,6 +16,7 @@ export class FileCreateDownloadService {
   }
 
   public createIcsFileFromTermine(fileName: string) {
+    console.log(new Date().getFullYear());
     let content = this.generateICSHeader();
     this.terminService.getTermine().forEach((termin) => {
       content += 'BEGIN:VEVENT' + this.NEWLINE;
@@ -34,6 +35,7 @@ export class FileCreateDownloadService {
       content += 'END:VEVENT' + this.NEWLINE;
     });
     content += 'END:VCALENDAR';
+    console.log('asdf');
     this.createAndDownloadFile(fileName, content);
   }
 
@@ -43,27 +45,28 @@ export class FileCreateDownloadService {
     result += 'CALSCALE:GREGORIAN' + this.NEWLINE;
     result += 'METHOD:PUBLISH' + this.NEWLINE;
     result += 'PERIODID:ICSGenerator by Jan Preisig' + uuid() + this.NEWLINE;
-    result += 'TZ:-02' + this.NEWLINE;
     return result;
   }
 
   private createDateTimeStringFromDate(date: Date): string {
+    const dateObj = new Date(date);
     let result = '';
-    result += date.getFullYear();
-    result += this.pad2(date.getMonth() + 1);
-    result += date.getDate();
+    result += dateObj.getFullYear();
+    result += this.pad2(dateObj.getMonth() + 1);
+    result += dateObj.getDate();
     result += 'T';
-    result += date.getHours();
-    result += date.getMinutes();
+    result += dateObj.getHours();
+    result += dateObj.getMinutes();
     result += '00';
     return result;
   }
 
   private createDateTimeStringFromDateAndTime(date: Date, time: string): string {
+    const dateObj = new Date(date);
     let result = '';
-    result += date.getFullYear();
-    result += this.pad2(date.getMonth() + 1);
-    result += date.getDate();
+    result += dateObj.getFullYear();
+    result += this.pad2(dateObj.getMonth() + 1);
+    result += dateObj.getDate();
     result += 'T';
     result += time.substr(0, 2);
     result += time.substr(3, 5);

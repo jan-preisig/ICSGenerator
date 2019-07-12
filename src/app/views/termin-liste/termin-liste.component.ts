@@ -3,6 +3,7 @@ import {TerminService} from '../../services/termin.service';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {Termin} from '../../models/Termin';
 import {Router} from '@angular/router';
+import {FileCreateDownloadService} from '../../services/file-create-download.service';
 
 @Component({
   selector: 'app-termin-liste',
@@ -16,7 +17,7 @@ export class TerminListeComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private terminService: TerminService, private router: Router) {
+  constructor(private fileCreateDownloadService: FileCreateDownloadService, private terminService: TerminService, private router: Router) {
   }
 
   ngOnInit() {
@@ -30,6 +31,10 @@ export class TerminListeComponent implements OnInit, AfterViewInit {
   public deleteTerminByUid(uid: string) {
     this.terminService.deleteByUid(uid);
     this.dataSource = new MatTableDataSource<Termin>(this.terminService.getTermine());
+  }
+
+  public download(fileName: string) {
+    this.fileCreateDownloadService.createIcsFileFromTermine(fileName);
   }
 
 }
