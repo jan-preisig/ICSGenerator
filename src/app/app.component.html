@@ -2,19 +2,8 @@
     <span>
       <button mat-button routerLink="/">{{title}}</button>
       <button mat-button routerLink="/"><mat-icon>home</mat-icon></button>
+      <button mat-button routerLink="termin-list"><mat-icon>list</mat-icon></button>
     </span>
-  <div fxLayout="row" fxShow="false" fxShow.gt-sm>
-    <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
-      <div class="input-group">
-        <input class="input-group-field" type="search" value="" placeholder="Search" formControlName="search">
-        <div class="input-group-button">
-          <button mat-flat-button color="accent">
-            <mat-icon>search</mat-icon>
-          </button>
-        </div>
-      </div>
-    </form>
-  </div>
   <button mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
     <mat-icon>menu</mat-icon>
   </button>
@@ -24,9 +13,9 @@
     <mat-icon>home</mat-icon>
     Home
   </button>
-  <button mat-menu-item routerLink="/">
-    <mat-icon>home</mat-icon>
-    Home
+  <button mat-menu-item routerLink="termin-list">
+    <mat-icon>list</mat-icon>
+    Termin übersicht
   </button>
 </mat-menu>
 <router-outlet></router-outlet>
